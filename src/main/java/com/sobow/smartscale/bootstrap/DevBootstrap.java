@@ -21,11 +21,12 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>
   @Override
   public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent)
   {
-    initData();
+    //initData();
   }
   
   private void initData()
   {
+    
     User user1 = new User();
     user1.setUserName("Patryk Sobow");
     user1.setAge(25);

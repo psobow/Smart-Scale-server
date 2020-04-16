@@ -13,4 +13,7 @@ public interface MeasurementDao extends CrudRepository<Measurement, Long>
 {
   @Override
   List<Measurement> findAll();
+  
+  @Override
+  List<Measurement> findAllById(Iterable<Long> IDs);
 }

@@ -36,5 +36,5 @@ public class User
       cascade = CascadeType.ALL,
       mappedBy = "user"
   )
-  List<Measurement> measurements;
+  private List<Measurement> measurements;
 }
