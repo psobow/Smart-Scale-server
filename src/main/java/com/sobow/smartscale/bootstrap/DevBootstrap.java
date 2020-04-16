@@ -3,7 +3,11 @@ package com.sobow.smartscale.bootstrap;
 import com.sobow.smartscale.domain.Measurement;
 import com.sobow.smartscale.domain.User;
 import com.sobow.smartscale.domain.dao.UserDao;
+import com.sobow.smartscale.dto.UserDto;
+import com.sobow.smartscale.mapper.UserMapper;
+import com.sobow.smartscale.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -16,12 +20,13 @@ import java.util.List;
 @AllArgsConstructor
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>
 {
-  private UserDao userDao;
+  @Autowired private UserService userService;
+  @Autowired private UserMapper userMapper;
   
   @Override
   public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent)
   {
-    //initData();
+    initData();
   }
   
   private void initData()
@@ -53,9 +58,17 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>
     measurement2.setUser(user1);
     user1.setMeasurements(measurements);
   
-    userDao.save(user1);
+    long userId = userService.save(user1).getId();
   
-    List<User> usersFromDB = userDao.findAll();
+    User newUser = userService.findById(userId);
+    UserDto newUserDto = userMapper.mapToUserDto(newUser);
+    
+    User newUser2 = userMapper.mapToUser(newUserDto);
+    
+    
+    List<User> usersFromDB = userService.findAll();
     System.out.println(usersFromDB.size());
+    
+    
   }
 }

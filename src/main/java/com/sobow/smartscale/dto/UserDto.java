@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Id;
 import java.util.List;
 
 @NoArgsConstructor
@@ -14,9 +13,6 @@ import java.util.List;
 @Setter
 public class UserDto
 {
-  @Id
-  private long id;
-  
   private String userName;
   
   private int age;

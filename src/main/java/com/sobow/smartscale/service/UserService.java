@@ -23,9 +23,14 @@ public class UserService
     return userDao.findById(id).orElse(null);
   }
   
-  public void deleteAll()
+  public User findByEmail(final String email)
   {
-    userDao.deleteAll();
+    return userDao.findByEmail(email).orElse(null);
+  }
+  
+  public void deleteById(final long id)
+  {
+    userDao.deleteById(id);
   }
   
   public User save(final User user)
