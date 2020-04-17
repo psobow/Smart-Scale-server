@@ -18,12 +18,6 @@ public class MeasurementController
   private final MeasurementService measurementService;
   private final MeasurementMapper measurementMapper;
   
-  // GET MAPPINGS
-  @GetMapping
-  public List<MeasurementDto> getMeasurements()
-  {
-    return measurementMapper.mapToMeasurementDtos(measurementService.findAll());
-  }
   
   @GetMapping
   public List<MeasurementDto> getMeasurementsByIds(@RequestBody List<Long> ids)

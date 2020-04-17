@@ -12,6 +12,7 @@ public class SmartscaleApplication
     SpringApplication.run(SmartscaleApplication.class, args);
     // h2 database available under URL: http://localhost:8080/h2-console/
     // config: JDBC URL = jdbc:h2:mem:testdb
+    // Swagger: http://localhost:8080/swagger-ui.html
   }
 
 }
