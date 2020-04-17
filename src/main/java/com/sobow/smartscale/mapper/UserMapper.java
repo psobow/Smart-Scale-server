@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class UserMapper
@@ -43,5 +44,15 @@ public class UserMapper
                        user.getSex(),
                        user.getPassword(),
                        measurementIds);
+  }
+  
+  public List<User> mapToUsers(List<UserDto> userDtos)
+  {
+    return userDtos.stream().map(this::mapToUser).collect(Collectors.toList());
+  }
+  
+  public List<UserDto> mapToUserDtos(List<User> users)
+  {
+    return users.stream().map(this::mapToUserDto).collect(Collectors.toList());
   }
 }

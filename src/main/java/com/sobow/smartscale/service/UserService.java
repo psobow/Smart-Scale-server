@@ -2,6 +2,7 @@ package com.sobow.smartscale.service;
 
 import com.sobow.smartscale.domain.User;
 import com.sobow.smartscale.domain.dao.UserDao;
+import com.sobow.smartscale.exceptionHandling.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class UserService
   
   public User findById(final long id)
   {
-    return userDao.findById(id).orElse(null);
+    return userDao.findById(id).orElseThrow(() -> new UserNotFoundException("UserNotFoundException"));
   }
   
   public User findByEmail(final String email)
