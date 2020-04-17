@@ -24,6 +24,12 @@ public class UserController
     return userMapper.mapToUserDtos(userService.findAll());
   }
   
+  @GetMapping("/{id}")
+  public UserDto getUserByiD(@PathVariable("id") final long id)
+  {
+    return userMapper.mapToUserDto(userService.findById(id));
+  }
+  
   @GetMapping("/{email}/{password}")
   public UserDto getUserByEmail(@PathVariable("email") final String email, @PathVariable("password") final String password)
   {
@@ -48,7 +54,7 @@ public class UserController
   @PostMapping
   public void createUser(@RequestBody final UserDto userDto)
   {
-    userService.save(userMapper.mapToUser(userDto));
+    userService.create(userMapper.mapToUser(userDto));
   }
   
 }

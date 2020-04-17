@@ -4,7 +4,6 @@ import com.sobow.smartscale.domain.Measurement;
 import com.sobow.smartscale.domain.User;
 import com.sobow.smartscale.dto.UserDto;
 import com.sobow.smartscale.service.MeasurementService;
-import com.sobow.smartscale.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,18 +16,16 @@ public class UserMapper
 {
   @Autowired
   private MeasurementService measurementService;
-  @Autowired
-  private UserService userService;
   
   public User mapToUser(final UserDto userDto)
   {
-    long id = -1;
-    if (userService.existsByEmail(userDto.getEmail()))
+    List<Long> measurementIds = new ArrayList<>();
+    if (userDto.getMeasurementIds() != null)
     {
-      id = userService.findByEmail(userDto.getEmail()).getId();
+      measurementIds.addAll(userDto.getMeasurementIds());
     }
-    List<Measurement> measurements = measurementService.findAllById(userDto.getMeasurementIds());
-    return new User(id,
+    List<Measurement> measurements = measurementService.findAllById(measurementIds);
+    return new User(userDto.getId(),
                     userDto.getUserName(),
                     userDto.getAge(),
                     userDto.getEmail(),
@@ -42,7 +39,8 @@ public class UserMapper
     List<Long> measurementIds = new ArrayList<>();
     user.getMeasurements().forEach(measurement -> measurementIds.add(measurement.getId()));
     
-    return new UserDto(user.getUserName(),
+    return new UserDto(user.getId(),
+                       user.getUserName(),
                        user.getAge(),
                        user.getEmail(),
                        user.getSex(),

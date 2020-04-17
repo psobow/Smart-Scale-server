@@ -3,7 +3,6 @@ package com.sobow.smartscale.mapper;
 import com.sobow.smartscale.domain.Measurement;
 import com.sobow.smartscale.domain.User;
 import com.sobow.smartscale.dto.MeasurementDto;
-import com.sobow.smartscale.service.MeasurementService;
 import com.sobow.smartscale.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,16 +15,12 @@ public class MeasurementMapper
 {
   @Autowired
   private UserService userService;
-  @Autowired
-  private MeasurementService measurementService;
   
   public Measurement mapToMeasurement(MeasurementDto measurementDto)
   {
     User userFromDatabase = userService.findById(measurementDto.getUserId());
-    long measurementId = measurementService.findByLocalDateTimeAndUser(measurementDto.getLocalDateTime(),
-                                                                       userFromDatabase).getId();
     
-    return new Measurement(measurementId,
+    return new Measurement(measurementDto.getId(),
                            measurementDto.getLocalDateTime(),
                            measurementDto.getWeight(),
                            measurementDto.getBMI(),
@@ -34,7 +29,8 @@ public class MeasurementMapper
   
   public MeasurementDto mapToMeasurementDto(Measurement measurement)
   {
-    return new MeasurementDto(measurement.getLocalDateTime(),
+    return new MeasurementDto(measurement.getId(),
+                              measurement.getLocalDateTime(),
                               measurement.getWeight(),
                               measurement.getBMI(),
                               measurement.getUser().getId());

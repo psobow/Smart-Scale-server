@@ -84,8 +84,8 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>
     user2.setMeasurements(measurements2);
     
   
-    long user1Id = userService.save(user1).getId();
-    long user2Id = userService.save(user2).getId();
+    long user1Id = userService.create(user1).getId();
+    long user2Id = userService.create(user2).getId();
     
     
     

@@ -25,9 +25,22 @@ public class MeasurementController
     return measurementMapper.mapToMeasurementDtos(measurementService.findAll());
   }
   
+  // POST MAPPING
+  @PostMapping
+  public void createMeasurement(@RequestBody final MeasurementDto measurementDto)
+  {
+    measurementService.save(measurementMapper.mapToMeasurement(measurementDto));
+  }
+  
   // DELETE MAPPING
+  @DeleteMapping("/{id}")
+  public void deleteById(@PathVariable("id") long id)
+  {
+    measurementService.deleteById(id);
+  }
+  
   @DeleteMapping
-  public void deleteByIds(@RequestBody UserDto userDto)
+  public void deleteAllByIds(@RequestBody UserDto userDto)
   {
     measurementService.deleteAllById(userDto.getMeasurementIds());
   }

@@ -5,12 +5,14 @@ import com.sobow.smartscale.domain.dao.UserDao;
 import com.sobow.smartscale.dto.UserDto;
 import com.sobow.smartscale.exceptionHandling.UserAlreadyExistException;
 import com.sobow.smartscale.exceptionHandling.UserNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class UserService
 {
   @Autowired
@@ -40,19 +42,24 @@ public class UserService
                                                                + " NotFoundException"));
   }
   
-  public void deleteById(final long id)
-  {
-    userDao.deleteById(id);
-  }
-  
   public void deleteByEmail(final String email)
   {
     userDao.deleteByEmail(email);
   }
   
-  public User save(final User user)
+  public User create(final User user)
   {
-    return userDao.save(user);
+    // If user email not exist in database save new entry
+    if (existsByEmail(user.getEmail()) == false)
+    {
+      User userFromDb = userDao.save(user);
+      log.info("Created new user in database with ID: " + userFromDb.getId());
+      return userFromDb;
+    }
+    else
+    {
+      throw new UserAlreadyExistException("User with email adress: " + user.getEmail() + " already exists in database. Cannot create entry.");
+    }
   }
   
   public boolean existsByEmail(final String email)
@@ -79,6 +86,6 @@ public class UserService
     userToUpdate.setAge(userDto.getAge());
     
     // Update info in database
-    return save(userToUpdate);
+    return userDao.save(userToUpdate);
   }
 }
