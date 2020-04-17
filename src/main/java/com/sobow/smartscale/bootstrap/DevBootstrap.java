@@ -2,8 +2,6 @@ package com.sobow.smartscale.bootstrap;
 
 import com.sobow.smartscale.domain.Measurement;
 import com.sobow.smartscale.domain.User;
-import com.sobow.smartscale.domain.dao.UserDao;
-import com.sobow.smartscale.dto.UserDto;
 import com.sobow.smartscale.mapper.UserMapper;
 import com.sobow.smartscale.service.UserService;
 import lombok.AllArgsConstructor;
@@ -58,12 +56,37 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>
     measurement2.setUser(user1);
     user1.setMeasurements(measurements);
   
-    long userId = userService.save(user1).getId();
   
-    User newUser = userService.findById(userId);
-    UserDto newUserDto = userMapper.mapToUserDto(newUser);
+    User user2= new User();
+    user2.setUserName("Stasiu Bargiello");
+    user2.setAge(30);
+    user2.setEmail("new@email.pl");
+    user2.setSex("Male");
+    user2.setPassword("Witam123");
+  
+    Measurement measurement3 = new Measurement();
+    measurement3.setBMI(15.0);
+    measurement3.setWeight(56.5);
+    measurement3.setLocalDateTime(LocalDateTime.now());
+  
+    Measurement measurement4 = new Measurement();
+    measurement4.setBMI(16.0);
+    measurement4.setWeight(59.5);
+    measurement4.setLocalDateTime(LocalDateTime.now());
+  
+    // Set up relation
+    List<Measurement> measurements2 = new ArrayList<>();
+    measurements2.add(measurement3);
+    measurements2.add(measurement4);
+  
+    measurement3.setUser(user2);
+    measurement4.setUser(user2);
+    user2.setMeasurements(measurements2);
     
-    User newUser2 = userMapper.mapToUser(newUserDto);
+  
+    long user1Id = userService.save(user1).getId();
+    long user2Id = userService.save(user2).getId();
+    
     
     
     List<User> usersFromDB = userService.findAll();

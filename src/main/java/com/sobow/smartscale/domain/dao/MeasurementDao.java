@@ -21,4 +21,5 @@ public interface MeasurementDao extends CrudRepository<Measurement, Long>
   List<Measurement> findAllById(Iterable<Long> IDs);
   
   Optional<Measurement> findByLocalDateTimeAndUser(LocalDateTime localDateTime, User user);
+  
 }

@@ -19,4 +19,9 @@ public interface UserDao extends CrudRepository<User, Long>
   Optional<User> findById(final long id);
   
   Optional<User> findByEmail(String email);
+  Optional<User> findByEmailAndPassword(String email, String password);
+  
+  boolean existsByEmail(String email);
+  
+  void deleteByEmail(String email);
 }

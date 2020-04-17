@@ -29,8 +29,8 @@ public class MeasurementService
     return measurementDao.findByLocalDateTimeAndUser(localDateTime,user).orElse(null);
   }
   
-  public void deleteAll(List<Measurement> measurements)
+  public void deleteAllById(List<Long> ids)
   {
-    measurementDao.deleteAll(measurements);
+    measurementDao.deleteAll(findAllById(ids));
   }
 }

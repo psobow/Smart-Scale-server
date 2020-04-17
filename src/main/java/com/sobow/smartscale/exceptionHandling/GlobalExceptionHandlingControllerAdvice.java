@@ -18,4 +18,12 @@ public class GlobalExceptionHandlingControllerAdvice
   {
     return new ErrorInfo(req.getRequestURI(), ex);
   }
+  
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(UserAlreadyExistException.class)
+  @ResponseBody ErrorInfo
+  handleUserAlreadyExists(HttpServletRequest req, Exception ex)
+  {
+    return new ErrorInfo(req.getRequestURI(), ex);
+  }
 }

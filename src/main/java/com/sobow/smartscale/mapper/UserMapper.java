@@ -22,8 +22,12 @@ public class UserMapper
   
   public User mapToUser(final UserDto userDto)
   {
+    long id = -1;
+    if (userService.existsByEmail(userDto.getEmail()))
+    {
+      id = userService.findByEmail(userDto.getEmail()).getId();
+    }
     List<Measurement> measurements = measurementService.findAllById(userDto.getMeasurementIds());
-    long id = userService.findByEmail(userDto.getEmail()).getId();
     return new User(id,
                     userDto.getUserName(),
                     userDto.getAge(),
