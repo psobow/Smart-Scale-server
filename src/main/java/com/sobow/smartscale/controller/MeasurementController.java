@@ -7,6 +7,7 @@ import com.sobow.smartscale.service.MeasurementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,7 +28,7 @@ public class MeasurementController
   
   // POST MAPPING
   @PostMapping
-  public void createMeasurement(@RequestBody final MeasurementDto measurementDto)
+  public void createMeasurement(@Valid @RequestBody final MeasurementDto measurementDto)
   {
     measurementService.save(measurementMapper.mapToMeasurement(measurementDto));
   }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -19,8 +20,10 @@ public class MeasurementDto
   
   private LocalDateTime localDateTime;
   
+  @Min(value = 0, message = "Weight cannot be negative number")
   private double weight;
   
+  @Min(value = 0, message = "BMI cannot be negative number")
   private double BMI;
   
   // Foreign key

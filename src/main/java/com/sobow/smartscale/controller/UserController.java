@@ -6,6 +6,7 @@ import com.sobow.smartscale.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -45,14 +46,14 @@ public class UserController
   
   // PUT MAPPING
   @PutMapping("/{email}")
-  public UserDto updateUser(@PathVariable("email") final String email, @RequestBody final UserDto userDto)
+  public UserDto updateUser(@PathVariable("email") final String email, @Valid @RequestBody final UserDto userDto)
   {
     return userMapper.mapToUserDto(userService.update(email,userDto));
   }
   
   // POST MAPPING
   @PostMapping
-  public void createUser(@RequestBody final UserDto userDto)
+  public void createUser(@Valid @RequestBody final UserDto userDto)
   {
     userService.create(userMapper.mapToUser(userDto));
   }
