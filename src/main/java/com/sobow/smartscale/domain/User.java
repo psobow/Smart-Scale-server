@@ -26,6 +26,8 @@ public class User
   
   private int age;
   
+  private int height;
+  
   private String email;
   
   private String sex;

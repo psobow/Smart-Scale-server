@@ -33,6 +33,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>
     User user1 = new User();
     user1.setUserName("Patryk Sobow");
     user1.setAge(25);
+    user1.setHeight(150);
     user1.setEmail("adress@email.pl");
     user1.setSex("Male");
     user1.setPassword("dupa123");
@@ -60,6 +61,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>
     User user2= new User();
     user2.setUserName("Stasiu Bargiello");
     user2.setAge(30);
+    user2.setHeight(180);
     user2.setEmail("new@email.pl");
     user2.setSex("Male");
     user2.setPassword("Witam123");
