@@ -24,11 +24,9 @@ public class UserDto
   @Pattern(regexp = "[A-Za-z0-9]{3,20}", message = "User name can contain only letters and numbers and has to be from 3 to 20 char length")
   private String userName;
   
-  @NotEmpty(message = "Age cannot be null or empty")
   @Min(value = 1, message = "Age cannot be zero or negative number")
   private int age;
   
-  @NotEmpty(message = "Height cannot be null or empty")
   @Min(value = 1, message = "Height cannot be zero or negative number")
   private int heightInCM;
   

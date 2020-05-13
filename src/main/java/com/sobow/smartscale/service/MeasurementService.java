@@ -4,12 +4,14 @@ import com.sobow.smartscale.domain.Measurement;
 import com.sobow.smartscale.domain.User;
 import com.sobow.smartscale.domain.dao.MeasurementDao;
 import com.sobow.smartscale.domain.dao.UserDao;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class MeasurementService
 {
   @Autowired private MeasurementDao measurementDao;
@@ -40,5 +42,6 @@ public class MeasurementService
     User user = measurement.getUser();
     user.getMeasurements().add(measurement);
     userDao.save(user);
+    log.info("Created new measurement in database with ID: " + measurement.getId());
   }
 }

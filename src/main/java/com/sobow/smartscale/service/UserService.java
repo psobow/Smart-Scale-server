@@ -42,9 +42,9 @@ public class UserService
                                                                + " NotFoundException"));
   }
   
-  public void deleteByEmail(final String email)
+  public void deleteByEmailAndPassword(final String email, final String password)
   {
-    userDao.deleteByEmail(email);
+    userDao.deleteByEmailAndPassword(email, password);
   }
   
   public User create(final User user)
@@ -62,7 +62,7 @@ public class UserService
     }
   }
   
-  public boolean existsByEmail(final String email)
+  private boolean existsByEmail(final String email)
   {
     return userDao.existsByEmail(email);
   }
@@ -71,8 +71,8 @@ public class UserService
   {
     // Find that user in database if not exists throw exception
     User userToUpdate = findByEmail(emailOfUserToUpdate);
-    
-    // Check if new adress email is the same as old one and if not check if new email isnt already taken
+  
+    // Check if new adress email is the same as old one and if not, check if new email isn't already taken
     if (emailOfUserToUpdate.equals(userDto.getEmail()) == false
         && existsByEmail(userDto.getEmail()))
     {

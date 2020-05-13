@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -20,27 +21,27 @@ public class MeasurementController
   
   
   @GetMapping
-  public List<MeasurementDto> getMeasurementsByIds(@RequestBody List<Long> ids)
+  public List<MeasurementDto> getMeasurementsByIds(@RequestBody @NotNull List<Long> ids)
   {
     return measurementMapper.mapToMeasurementDtos(measurementService.findAllById(ids));
   }
   
   // POST MAPPING
   @PostMapping
-  public void createMeasurement(@Valid @RequestBody final MeasurementDto measurementDto)
+  public void createMeasurement(@Valid @RequestBody @NotNull final MeasurementDto measurementDto)
   {
     measurementService.save(measurementMapper.mapToMeasurement(measurementDto));
   }
   
   // DELETE MAPPING
   @DeleteMapping("/{id}")
-  public void deleteById(@PathVariable("id") long id)
+  public void deleteById(@PathVariable("id") @NotNull Long id)
   {
     measurementService.deleteById(id);
   }
   
   @DeleteMapping
-  public void deleteAllForUser(@RequestBody List<Long> ids)
+  public void deleteAllByIds(@RequestBody @NotNull List<Long> ids)
   {
     measurementService.deleteAllById(ids);
   }

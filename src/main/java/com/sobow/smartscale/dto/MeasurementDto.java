@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Id;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -18,6 +19,7 @@ public class MeasurementDto
   @Id
   private long id;
   
+  @NotNull
   private LocalDateTime localDateTime;
   
   @Min(value = 0, message = "Weight cannot be negative number")

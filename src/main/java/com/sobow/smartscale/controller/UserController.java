@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -26,34 +27,37 @@ public class UserController
   }
   
   @GetMapping("/{id}")
-  public UserDto getUserById(@PathVariable("id") final long id)
+  public UserDto getUserById(@PathVariable("id") final Long id)
   {
     return userMapper.mapToUserDto(userService.findById(id));
   }
   
   @GetMapping("/{email}/{password}")
-  public UserDto getUserByEmail(@PathVariable("email") final String email, @PathVariable("password") final String password)
+  public UserDto getUserByEmailAndPassword(@PathVariable("email") final String email,
+                                           @PathVariable("password") final String password)
   {
     return userMapper.mapToUserDto(userService.findByEmailAndPassword(email, password));
   }
   
   // DELETE MAPPINGS
-  @DeleteMapping("/{email}")
-  public void deleteUserByEmail(@PathVariable("email") final String email)
+  @DeleteMapping("/{email}/{password}")
+  public void deleteUserByEmailAndPassword(@PathVariable("email") final String email,
+                                           @PathVariable("password") final String password)
   {
-    userService.deleteByEmail(email);
+    userService.deleteByEmailAndPassword(email, password);
   }
   
   // PUT MAPPING
   @PutMapping("/{email}")
-  public UserDto updateUser(@PathVariable("email") final String email, @Valid @RequestBody final UserDto userDto)
+  public UserDto updateUser(@PathVariable("email") final String email,
+                            @Valid @NotNull @RequestBody final UserDto userDto)
   {
-    return userMapper.mapToUserDto(userService.update(email,userDto));
+    return userMapper.mapToUserDto(userService.update(email, userDto));
   }
   
   // POST MAPPING
   @PostMapping
-  public void createUser(@Valid @RequestBody final UserDto userDto)
+  public void createUser(@Valid @NotNull @RequestBody final UserDto userDto)
   {
     userService.create(userMapper.mapToUser(userDto));
   }

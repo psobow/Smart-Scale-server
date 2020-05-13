@@ -23,5 +23,5 @@ public interface UserDao extends CrudRepository<User, Long>
   
   boolean existsByEmail(String email);
   
-  void deleteByEmail(String email);
+  void deleteByEmailAndPassword(String email, String password);
 }

@@ -36,7 +36,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>
     user1.setHeight(150);
     user1.setEmail("adress@email.pl");
     user1.setSex("Male");
-    user1.setPassword("dupa123");
+    user1.setPassword("haslo123");
   
     Measurement measurement1 = new Measurement();
     measurement1.setBMI(20.0);
