@@ -21,14 +21,14 @@ public class MeasurementController
   private final MeasurementMapper measurementMapper;
   
   
-  @GetMapping
+  // POST MAPPING
+  @PostMapping
   public List<MeasurementDto> getMeasurementsByUser(@RequestBody @NotNull UserDto userDto)
   {
     return measurementMapper.mapToMeasurementDtos(measurementService.findAllByUser(userDto));
   }
   
-  // POST MAPPING
-  @PostMapping
+  @PostMapping("/create")
   public void createMeasurement(@Valid @RequestBody @NotNull final MeasurementDto measurementDto)
   {
     measurementService.save(measurementMapper.mapToMeasurement(measurementDto));
