@@ -1,6 +1,7 @@
 package com.sobow.smartscale.controller;
 
 import com.sobow.smartscale.dto.MeasurementDto;
+import com.sobow.smartscale.dto.UserDto;
 import com.sobow.smartscale.mapper.MeasurementMapper;
 import com.sobow.smartscale.service.MeasurementService;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +22,9 @@ public class MeasurementController
   
   
   @GetMapping
-  public List<MeasurementDto> getMeasurementsByIds(@RequestBody @NotNull List<Long> ids)
+  public List<MeasurementDto> getMeasurementsByUser(@RequestBody @NotNull UserDto userDto)
   {
-    return measurementMapper.mapToMeasurementDtos(measurementService.findAllById(ids));
+    return measurementMapper.mapToMeasurementDtos(measurementService.findAllByUser(userDto));
   }
   
   // POST MAPPING
@@ -41,8 +42,8 @@ public class MeasurementController
   }
   
   @DeleteMapping
-  public void deleteAllByIds(@RequestBody @NotNull List<Long> ids)
+  public void deleteAllByUser(@RequestBody @NotNull UserDto userDto)
   {
-    measurementService.deleteAllById(ids);
+    measurementService.deleteAllByUser(userDto);
   }
 }

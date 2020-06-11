@@ -48,18 +48,19 @@ public class UserController
   }
   
   // PUT MAPPING
-  @PutMapping("/{email}")
+  @PutMapping("/{email}/{password}")
   public UserDto updateUser(@PathVariable("email") final String email,
+                            @PathVariable("password") final String password,
                             @Valid @NotNull @RequestBody final UserDto userDto)
   {
-    return userMapper.mapToUserDto(userService.update(email, userDto));
+    return userMapper.mapToUserDto(userService.update(email, password, userDto));
   }
   
   // POST MAPPING
   @PostMapping
-  public void createUser(@Valid @NotNull @RequestBody final UserDto userDto)
+  public UserDto createUser(@Valid @NotNull @RequestBody final UserDto userDto)
   {
-    userService.create(userMapper.mapToUser(userDto));
+    return userMapper.mapToUserDto(userService.create(userMapper.mapToUser(userDto)));
   }
   
 }

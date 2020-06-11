@@ -24,11 +24,11 @@ public class UserMapper
     {
       measurementIds.addAll(userDto.getMeasurementIds());
     }
-    List<Measurement> measurements = measurementService.findAllById(measurementIds);
+    List<Measurement> measurements = measurementService.findAllByUser(userDto);
     return new User(userDto.getId(),
                     userDto.getUserName(),
                     userDto.getAge(),
-                    userDto.getHeightInCM(),
+                    userDto.getHeight(),
                     userDto.getEmail(),
                     userDto.getSex(),
                     userDto.getPassword(),

@@ -4,6 +4,7 @@ import com.sobow.smartscale.domain.Measurement;
 import com.sobow.smartscale.domain.User;
 import com.sobow.smartscale.domain.dao.MeasurementDao;
 import com.sobow.smartscale.domain.dao.UserDao;
+import com.sobow.smartscale.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,14 +23,15 @@ public class MeasurementService
     return measurementDao.findAll();
   }
   
-  public List<Measurement> findAllById(List<Long> ids)
+  public List<Measurement> findAllByUser(UserDto userDto)
   {
+    List<Long> ids = userDto.getMeasurementIds();
     return measurementDao.findAllById(ids);
   }
   
-  public void deleteAllById(List<Long> ids)
+  public void deleteAllByUser(UserDto userDto)
   {
-    measurementDao.deleteAll(findAllById(ids));
+    measurementDao.deleteAll(findAllByUser(userDto));
   }
   
   public void deleteById(Long id)

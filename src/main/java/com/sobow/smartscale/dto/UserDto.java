@@ -28,7 +28,7 @@ public class UserDto
   private int age;
   
   @Min(value = 1, message = "Height cannot be zero or negative number")
-  private int heightInCM;
+  private int height;
   
   @NotEmpty(message = "Email cannot be null or empty")
   @Pattern(regexp = "^((\"[\\w-\\s]+\")|([\\w-]+(?:\\.[\\w-]+)*)|(\"[\\w-\\s]+\")([\\w-]+(?:\\.[\\w-]+)*))(@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$)|(@\\[?((25[0-5]\\.|2[0-4][0-9]\\.|1[0-9]{2}\\.|[0-9]{1,2}\\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\\]?$)",
@@ -36,7 +36,7 @@ public class UserDto
   private String email;
   
   @NotEmpty(message = "Sex cannot be null or empty")
-  @Pattern(regexp = "[mM]ale|[fF]emale", message = "Invalid sex. Should be Male or Female")
+  @Pattern(regexp = "Male|Female", message = "Invalid sex. Should be Male or Female")
   private String sex;
   
   @NotEmpty(message = "Password cannot be null or empty")

@@ -29,11 +29,6 @@ public class UserService
                   .orElseThrow(() -> new UserNotFoundException("User with ID: " + id + " NotFoundException"));
   }
   
-  public User findByEmail(final String email)
-  {
-    return userDao.findByEmail(email)
-                  .orElseThrow(() -> new UserNotFoundException("User with email: " + email + " NotFoundException"));
-  }
   
   public User findByEmailAndPassword(final String email, final String password)
   {
@@ -67,10 +62,10 @@ public class UserService
     return userDao.existsByEmail(email);
   }
   
-  public User update(final String emailOfUserToUpdate, final UserDto userDto)
+  public User update(final String emailOfUserToUpdate, final String passwordOfUserToUpdate, final UserDto userDto)
   {
     // Find that user in database if not exists throw exception
-    User userToUpdate = findByEmail(emailOfUserToUpdate);
+    User userToUpdate = findByEmailAndPassword(emailOfUserToUpdate, passwordOfUserToUpdate);
   
     // Check if new adress email is the same as old one and if not, check if new email isn't already taken
     if (emailOfUserToUpdate.equals(userDto.getEmail()) == false
