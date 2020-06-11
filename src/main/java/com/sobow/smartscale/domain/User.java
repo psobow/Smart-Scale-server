@@ -42,4 +42,24 @@ public class User
   )
   @LazyCollection(LazyCollectionOption.FALSE)
   private List<Measurement> measurements;
+  
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    
+    User user = (User) o;
+    
+    if (getEmail() != null ? ! getEmail().equals(user.getEmail()) : user.getEmail() != null) return false;
+    return getPassword() != null ? getPassword().equals(user.getPassword()) : user.getPassword() == null;
+  }
+  
+  @Override
+  public int hashCode()
+  {
+    int result = getEmail() != null ? getEmail().hashCode() : 0;
+    result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
+    return result;
+  }
 }

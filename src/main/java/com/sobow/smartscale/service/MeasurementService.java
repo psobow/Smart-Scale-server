@@ -17,6 +17,8 @@ public class MeasurementService
 {
   @Autowired private MeasurementDao measurementDao;
   @Autowired private UserDao userDao;
+  @Autowired
+  private UserService userService;
   
   public List<Measurement> findAll()
   {
@@ -25,8 +27,9 @@ public class MeasurementService
   
   public List<Measurement> findAllByUser(UserDto userDto)
   {
-    List<Long> ids = userDto.getMeasurementIds();
-    return measurementDao.findAllById(ids);
+    User user = userService.findByEmailAndPassword(userDto.getEmail(), userDto.getPassword());
+    List<Measurement> test = measurementDao.findAllByUser(user);
+    return test;
   }
   
   public void deleteAllByUser(UserDto userDto)
@@ -43,7 +46,7 @@ public class MeasurementService
   {
     User user = measurement.getUser();
     user.getMeasurements().add(measurement);
-    userDao.save(user);
-    log.info("Created new measurement in database with ID: " + measurement.getId());
+    User newUser = userDao.save(user);
+    log.info("Created new measurement in database");
   }
 }

@@ -20,6 +20,7 @@ public class MeasurementDto
   private long id;
   
   @NotNull
+  //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
   private LocalDateTime localDateTime;
   
   @Min(value = 0, message = "Weight cannot be negative number")
