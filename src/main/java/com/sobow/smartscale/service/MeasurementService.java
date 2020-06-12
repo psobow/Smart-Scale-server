@@ -9,16 +9,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Slf4j
 public class MeasurementService
 {
-  @Autowired private MeasurementDao measurementDao;
-  @Autowired private UserDao userDao;
   @Autowired
-  private UserService userService;
+  private MeasurementDao measurementDao;
+  @Autowired
+  private UserDao userDao;
   
   public List<Measurement> findAll()
   {
@@ -27,9 +28,16 @@ public class MeasurementService
   
   public List<Measurement> findAllByUser(UserDto userDto)
   {
-    User user = userService.findByEmailAndPassword(userDto.getEmail(), userDto.getPassword());
-    List<Measurement> test = measurementDao.findAllByUser(user);
-    return test;
+    User user = userDao.findByEmailAndPassword(userDto.getEmail(), userDto.getPassword()).orElse(null);
+  
+    List<Measurement> measurements = new ArrayList<>();
+  
+    if (user != null)
+    {
+      measurements.addAll(measurementDao.findAllByUser(user));
+    }
+  
+    return measurements;
   }
   
   public void deleteAllByUser(UserDto userDto)

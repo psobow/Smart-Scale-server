@@ -19,11 +19,6 @@ public class UserMapper
   
   public User mapToUser(final UserDto userDto)
   {
-    List<Long> measurementIds = new ArrayList<>();
-    if (userDto.getMeasurementIds() != null)
-    {
-      measurementIds.addAll(userDto.getMeasurementIds());
-    }
     List<Measurement> measurements = measurementService.findAllByUser(userDto);
     return new User(userDto.getId(),
                     userDto.getUserName(),
