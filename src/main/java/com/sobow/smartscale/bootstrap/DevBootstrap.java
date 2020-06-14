@@ -33,7 +33,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>
     User user1 = new User();
     user1.setUserName("PatrykSobow");
     user1.setAge(25);
-    user1.setHeight(150);
+    user1.setHeight(180);
     user1.setEmail("adres@email.pl");
     user1.setSex("Male");
     user1.setPassword("tak");
@@ -41,12 +41,12 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>
     Measurement measurement1 = new Measurement();
     measurement1.setBMI(20.0);
     measurement1.setWeight(80.0);
-    measurement1.setLocalDateTime(LocalDateTime.now().minusDays(1).minusHours(1));
+    measurement1.setLocalDateTime(LocalDateTime.now().minusDays(2).minusHours(1));
   
     Measurement measurement2 = new Measurement();
     measurement2.setBMI(21.0);
     measurement2.setWeight(75.5);
-    measurement2.setLocalDateTime(LocalDateTime.now());
+    measurement2.setLocalDateTime(LocalDateTime.now().minusDays(1));
   
     // Set up relation
     List<Measurement> measurements = new ArrayList<>();
