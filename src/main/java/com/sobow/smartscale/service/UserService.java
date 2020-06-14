@@ -79,6 +79,7 @@ public class UserService
     userToUpdate.setPassword(userDto.getPassword());
     userToUpdate.setSex(userDto.getSex());
     userToUpdate.setAge(userDto.getAge());
+    userToUpdate.setHeight(userDto.getHeight());
     
     // Update info in database
     return userDao.save(userToUpdate);
