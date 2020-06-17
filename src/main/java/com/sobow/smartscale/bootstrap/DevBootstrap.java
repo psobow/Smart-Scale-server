@@ -41,20 +41,28 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>
     Measurement measurement1 = new Measurement();
     measurement1.setBMI(20.0);
     measurement1.setWeight(80.0);
-    measurement1.setLocalDateTime(LocalDateTime.now().minusDays(2).minusHours(1));
+    measurement1.setLocalDateTime(LocalDateTime.now().minusDays(5).minusHours(1));
   
     Measurement measurement2 = new Measurement();
     measurement2.setBMI(21.0);
     measurement2.setWeight(75.5);
-    measurement2.setLocalDateTime(LocalDateTime.now().minusDays(1));
+    measurement2.setLocalDateTime(LocalDateTime.now());
+  
+  
+    Measurement measurement5 = new Measurement();
+    measurement5.setBMI(21.0);
+    measurement5.setWeight(75.5);
+    measurement5.setLocalDateTime(LocalDateTime.now().minusDays(3));
   
     // Set up relation
     List<Measurement> measurements = new ArrayList<>();
     measurements.add(measurement1);
     measurements.add(measurement2);
+    measurements.add(measurement5);
   
     measurement1.setUser(user1);
     measurement2.setUser(user1);
+    measurement5.setUser(user1);
     user1.setMeasurements(measurements);
   
   
