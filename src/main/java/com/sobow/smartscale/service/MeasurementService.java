@@ -42,12 +42,17 @@ public class MeasurementService
   
   public void deleteAllByUser(UserDto userDto)
   {
+    User user = userDao.findByEmailAndPassword(userDto.getEmail(), userDto.getPassword()).orElse(null);
+    // break up relation
+    user.setMeasurements(new ArrayList<>());
+    
     measurementDao.deleteAll(findAllByUser(userDto));
+    userDao.save(user);
   }
   
   public void deleteById(Long id)
   {
-    measurementDao.deleteById(id);
+    measurementDao.deleteById(id); // TODO: it will not work, first need to remove given measurement from user ArrayList<measurements>
   }
   
   public void save(Measurement measurement)
