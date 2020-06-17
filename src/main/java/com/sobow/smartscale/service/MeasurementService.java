@@ -52,7 +52,15 @@ public class MeasurementService
   
   public void deleteById(Long id)
   {
-    measurementDao.deleteById(id); // TODO: it will not work, first need to remove given measurement from user ArrayList<measurements>
+    Measurement measurement = measurementDao.findById(id).orElse(null);
+  
+    if (measurement != null)
+    {
+      User user = userDao.findById(measurement.getUser().getId()).orElse(null);
+      user.getMeasurements().remove(measurement); // break relation
+      measurementDao.deleteById(id);
+      userDao.save(user);
+    }
   }
   
   public void save(Measurement measurement)
