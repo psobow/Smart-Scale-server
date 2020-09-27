@@ -4,13 +4,11 @@ import com.sobow.smartscale.domain.dao.UserDao;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
@@ -23,7 +21,7 @@ class UserTest
   {
     User user1 = new User();
     user1.setUserName("Patryk Sobow");
-    user1.setAge(25);
+    user1.setBirthDate(LocalDate.of(1995, 11, 16));
     user1.setEmail("adress@email.pl");
     user1.setSex("Male");
     user1.setPassword("dupa123");

@@ -8,7 +8,9 @@ import lombok.Setter;
 import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
+import java.time.LocalDate;
 import java.util.List;
 
 @NoArgsConstructor
@@ -24,8 +26,8 @@ public class UserDto
   @Pattern(regexp = "[A-Za-z0-9]{3,20}", message = "User name can contain only letters and numbers and has to be from 3 to 20 char length")
   private String userName;
   
-  @Min(value = 1, message = "Age cannot be zero or negative number")
-  private int age;
+  @Past
+  private LocalDate birthDate;
   
   @Min(value = 1, message = "Height cannot be zero or negative number")
   private int height;

@@ -22,7 +22,7 @@ public class UserMapper
     List<Measurement> measurements = measurementService.findAllByUser(userDto);
     return new User(userDto.getId(),
                     userDto.getUserName(),
-                    userDto.getAge(),
+                    userDto.getBirthDate(),
                     userDto.getHeight(),
                     userDto.getEmail(),
                     userDto.getSex(),
@@ -37,7 +37,7 @@ public class UserMapper
     
     return new UserDto(user.getId(),
                        user.getUserName(),
-                       user.getAge(),
+                       user.getBirthDate(),
                        user.getHeight(),
                        user.getEmail(),
                        user.getSex(),

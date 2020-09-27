@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>
     
     User user1 = new User();
     user1.setUserName("PatrykSobow");
-    user1.setAge(25);
+    user1.setBirthDate(LocalDate.of(1995, 11, 16));
     user1.setHeight(180);
     user1.setEmail("adres@email.pl");
     user1.setSex("Male");
@@ -68,7 +69,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>
   
     User user2= new User();
     user2.setUserName("Stasiu Bargiello");
-    user2.setAge(30);
+    user2.setBirthDate(LocalDate.of(2005, 11, 16));
     user2.setHeight(180);
     user2.setEmail("new@email.pl");
     user2.setSex("Male");

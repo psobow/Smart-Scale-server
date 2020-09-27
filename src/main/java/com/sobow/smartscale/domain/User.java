@@ -8,6 +8,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,7 @@ public class User
   
   private String userName;
   
-  private int age;
+  private LocalDate birthDate;
   
   private int height;
   
@@ -50,7 +51,6 @@ public class User
     if (o == null || getClass() != o.getClass()) return false;
     
     User user = (User) o;
-    
     if (getEmail() != null ? ! getEmail().equals(user.getEmail()) : user.getEmail() != null) return false;
     return getPassword() != null ? getPassword().equals(user.getPassword()) : user.getPassword() == null;
   }
