@@ -24,7 +24,7 @@ class UserTest
     user1.setBirthDate(LocalDate.of(1995, 11, 16));
     user1.setEmail("adress@email.pl");
     user1.setSex("Male");
-    user1.setPassword("dupa123");
+    user1.setPassword("witam123");
     
     Measurement measurement = new Measurement();
     measurement.setBMI(20.0);
